@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>exercitando-só</title>
+    <style>
+        .foto {
+            border: solid 4px black;
+        }
+            .foto2 {
+            border: solid 4px black;
+        }
+    </style>
+</head>
+<body>
+    <input type="file" accept="image/*" class="file" hidden>
+    <img src="user.png" alt="foto princcipal" class="foto" width="250px" height="200px"><hr>
+  
+    
+    
+    <hr>
+    <h1>DE NOVO</h1>
+        <input type="file" accept="image/*" class="file2" hidden>
+    <img src="user.png" alt="foto princcipal" class="foto2" width="250px" height="200px"><hr>
+    <input type="button" value="SALVAR" class="btsalv">
+    
+</body>
+<script>
+    // primeiro passo é criar as constantes para facilitar as manifestações de scripts, para file e imgs;
+    
+        // adiconamos o evento de clique em imagem, e invocamos o evento de click do inputfile, atraves do event click adicionado na imagem;
+
+// terceiro adionamos o evento change em file, o evento change exige um parâmetro,  usaremos o evento change para atulizacao se troca em tempo real;
+//e na arrow fuction vamos precisar entrar no ateibuto .files.length, se for menos ou igual 0 chamanis o retorno;
+        
+ const foto = document.querySelector(".foto");
+ const file = document.querySelector(".file");
+ 
+foto.addEventListener("click", ()=>{
+    file.click(); 
+    
+   })
+   
+   file.addEventListener("change", (evento)=>{
+       if(
+           file.files.length <= 0
+       ){return}
+       
+       // agora precisamos acessar a biblioteca new fileReader() que significa novo leitor de arquivo; criamos uma variavel chamada leitor ou reader, clmo preferir oara adicionar essa instancia;
+       
+       const leitor = new FileReader();
+       
+       // FileReader() F maiusculo R maiusculo;
+       
+       
+              
+       leitor.onload = () => {
+           foto.src = leitor.result;
+       }
+       
+       leitor.readAsDataURL(file.files[0])
+       
+      // readAsDataURL(file.files[0]);
+      
+   //   memorize; pois esse e. o codigo principal para renderizar os dados URL encontrados no seus arquivos em tempo real.
+       
+   })   
+      
+    
+/*
+nome da nova estância;
+
+R= new FileReader();
+
+if(file2.files <= 0) {return}
+readAsDataURL(file2.files[0]);
+*/
+
+//*****
+const foto2 = document.querySelector(".foto2");
+ const file2 = document.querySelector(".file2");
+ 
+foto2.addEventListener("click", ()=>{
+    file2.click(); 
+    
+   })
+   
+   file2.addEventListener("change",(ex)=>{
+    if(file2.files.length <=0)  {
+        return;
+    }
+    
+    const reader = new FileReader();
+    
+    // não pode esquecer do onload();
+    
+   reader.onload = () => {
+       foto2.src = reader.result;
+        // onload para carregar o resultado; então leitor.result || reader.result; .result é o puko do gato;
+   }
+   
+   reader.readAsDataURL(file2.files[0])
+   })
+   
+/*
+codifique a partir do evento change;
+
+file.addEventListener("change", (event)=>{
+    if(file.files.length <= 0 ){
+        return
+    }
+    
+    const reader = new FileReader();
+    
+    reader.onload = () => {
+        img.src=reader.result;
+    }
+    
+    reader.readAsDataURL(file.files[0]);
+})
+
+
+
+*/
+
+</script>
+</html>
